@@ -122,8 +122,8 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     5     => 5
  *     0     => 0
  */
-function getLastDigit(/* value */) {
-  throw new Error('Not implemented');
+function getLastDigit(value) {
+  return value % 10;
 }
 
 /**
@@ -221,8 +221,11 @@ function isPrime(n) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  if (typeof Number(value) === 'number' && !Number.isNaN(Number(value))) {
+    return Number(value);
+  }
+  return def;
 }
 
 /**
@@ -253,8 +256,17 @@ function getCube(num) {
  *   3  => 2
  *   10 => 55
  */
-function getFibonacciNumber(/* index */) {
-  throw new Error('Not implemented');
+function getFibonacciNumber(index) {
+  let prevNum = 0;
+  let nextNum = 1;
+  let i = 0;
+  while (i < index) {
+    const saveNum = nextNum;
+    nextNum += prevNum;
+    prevNum = saveNum;
+    i += 1;
+  }
+  return prevNum;
 }
 
 /**
@@ -442,8 +454,8 @@ function isInteger(number) {
  * '4.567abcdefgh' => 4.567
  * 'abcdefgh'      => NaN
  */
-function getFloatOnString(/* str */) {
-  throw new Error('Not implemented');
+function getFloatOnString(str) {
+  return Number.parseFloat(str);
 }
 
 /**
@@ -460,8 +472,8 @@ function getFloatOnString(/* str */) {
  * '1.234', 2           => 1
  * '10', 8              => 8
  */
-function getIntegerOnString(/* str, base */) {
-  throw new Error('Not implemented');
+function getIntegerOnString(str, base) {
+  return Number.parseInt(str, base);
 }
 
 /**
@@ -549,8 +561,15 @@ function getIntegerPartNumber(number) {
  * 1, 2, 3       => 6
  * 0.1, 0.2, 0.3 => 0.6
  */
-function getSumOfNumbers(/* x1, x2, x3 */) {
-  throw new Error('Not implemented');
+function getSumOfNumbers(x1, x2, x3) {
+  const argsList = [x1, x2, x3];
+  let sum = 0;
+  let i = 0;
+  while (i < 3) {
+    sum += argsList[i];
+    i += 1;
+  }
+  return sum < 1 ? Math.floor(sum * 10) / 10 : Math.floor(sum);
 }
 
 /**
@@ -612,8 +631,14 @@ function getHypotenuse(a, b) {
  * 10 => 5
  * 15 => 8
  */
-function getCountOfOddNumbers(/* number */) {
-  throw new Error('Not implemented');
+function getCountOfOddNumbers(number) {
+  let result = 0;
+  let i = 0;
+  while (i <= Math.abs(number)) {
+    if (i % 2 !== 0) result += 1;
+    i += 1;
+  }
+  return result;
 }
 
 module.exports = {
